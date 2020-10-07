@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <fstream>
+#include <time.h>
+#include <iomanip>
+using namespace std;
+
+class node {
+public:
+    int info;
+    node* link;
+};
+
+//node* buildListForward();
+void printList(node* val);
+void changeEventoOdd(node** head);//double pointer to make it easier to change nodes within a linked list
+
+void addlist(node** head,int info){
+    node* new_node = new node(); //instantiate a new node
+    new_node->info=info; //link new_node to its info
+    new_node->link = (*head); //have the new_node link to the (*head) node
+    (*head)= new_node; //then the *head stores new_node in the head populating the list
+}
+ int main(){
+    node* head=nullptr; //start of list as nullptr to be an empty list
+
+    addlist(&head, 1);  //end of list
+    addlist(&head, 2);  
+    addlist(&head, 3);  
+    addlist(&head, 4);  
+    addlist(&head, 5);  
+    addlist(&head, 6);  
+    addlist(&head, 7); 
+    addlist(&head, 8); 
+    addlist(&head, 9);
+    addlist(&head, 10); //beginning of list
+
+cout<<"Linked List : " ;
+    printList(head);
+
+    changeEventoOdd(&head);
+ 
+cout<<"EvenToOdd Linked List : ";
+    printList(head);
+
+ }
+
+  void printList(node* val) {
+     node* current = val; //have the current node be the one called in
+
+     while (current != nullptr) { //while not at the end of list
+        cout << current->info << " "; //output the info of current node
+        current = current->link; //continue along the list
+     }
+     cout << endl << endl;
+ }
+ void changeEventoOdd(node **head){ 
+    node *last = *head;  //need to have last and current point to the first one until list is sorted
+    node *previous = nullptr; //have previous point to nullptr for the end of the list
+    node *current = *head;
+
+    
+    while(last->link!=nullptr){//pointer pointing to the last node
+        last =last->link;
+    }
+    node *nlast = last;
+
+
+    while(current->info%2!=0 && current !=last)
+{//check all of the odd nodes and make sure it is not the the last node either
+        nlast->link = current;//link the nlast node to the current one 
+        current=current->link;//traverse to next node
+        nlast->link->link=nullptr;//link the link to the nlast node to be null
+        nlast=nlast->link;//link the nlast node to the next node in line
+}
+
+if(current->info % 2 == 0){//if there exists an even node and that is also not the last node
+    *head = current;//start at beginning of *head node
+    while(current!= last){  
+        if(current->info%2==0){//check to make sure the info on the current node is even
+            previous=current;
+            current=current->link;//go to the next node
+        }
+            else{
+                previous->link = current->link;//break the link in previous
+                current->link = nullptr;//make current link null
+                nlast->link=current;//move current to the end of list
+                nlast = current; //make current as the new end of the list
+                current= previous->link;//fix the current pointer to the link of the change node
+            }
+    }
+}
+else previous= current; //previous set to the current if the "if" statement isn't true
+    if(nlast!= last&&last->info%2!=0){ //if the nlast is not the last node and the last node is not even
+        previous->link= last->link; //changing the link of previous to the last
+        last->link = nullptr; // removing last link
+        nlast->link=last; // changing last link as nlast to keep the odd numbers the same order in the list
+}
+
+}
+ 
+ 
