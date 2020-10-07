@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
+#include "ListandVector.h"
 
 using namespace std;
 
@@ -101,5 +102,17 @@ public:
 			cout << ptr[i] << " ";
 		}
 		cout << endl;
+	}
+
+	string generate_string() {
+		// The string size will be random, and contains only lowercase letters.
+		srand(time(0));
+		int size = rand() % 11;
+		string ans = "";
+		for (int i = 0; i < size; i++) {
+			ans += 'a' + rand() % 26;
+		}
+
+		return ans;
 	}
 };

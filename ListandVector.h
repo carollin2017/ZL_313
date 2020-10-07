@@ -5,8 +5,18 @@
 #include <list>
 #include <time.h>
 #include <iostream>
-#include "GetRandom.h"
+#include "Timing.cpp"
+#include "MoveIt.h"
 using namespace std;
+//Author: Zexian Lin
+//1. Test whether a vector or a list is faster by timing them via :
+//a.Filling them with random numbers
+//b.Filling them with random strings(use ascii)
+//c.Doing the above with move semantics when filling with random strings
+
+// The build functions will fill vector and list random int and string. 
+// when filling strings, we use generate_string() to generate lowercase string with random size.
+// In Q1_main(), we time the speed of buildVector() and buildList() using "Timing.cpp"
 
 string generate_string() {
 	// The string size will be random, and contains only lowercase letters.
@@ -51,4 +61,5 @@ void BuildList(int size, list <string> l) {
 		l.push_back(generate_string());
 	}
 }
+
 

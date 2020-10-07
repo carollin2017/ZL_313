@@ -2,6 +2,19 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+//Author: Zexian Lin
+//3. Create a sort for 2d matrices.Do a bubble sort, insertion sort, and selection sort
+//variation of this.
+
+//For sorting in the 2d matices, we need to pay attention to the indexing. 
+//Let say we have a 2d matrix with i rows and j column.
+//When we traverse from one row to its second row, i needs to starting from 0, j only needs to plus 1.
+//To solve the problem, we use the following strategy:
+//Given a matrix[3][3] = {{0,1,2},{3,4,5},{6,7,8}}
+//Known 5 is the 5th element in the matrix.(starting from index 0)
+//5 / row_size ==> 5/3 = 1 
+//5 mod row_size ==> 5 mod 3 = 2
+// matrix[1][2] --> the indexing of 5 in the matrix
 
 
 void printMatrix(int** array, int row, int col) {
@@ -83,27 +96,6 @@ void SelectionSort(int** array, int row, int col) {
 	cout << "After Selection Sort" << endl;
 	printMatrix(array, row, col);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
