@@ -139,6 +139,10 @@ The algorithm as follows:
  Therefore, when we test it in the main function, the user have an option to choose whether to run the 
  program continuely when the matching_char is exceed 16.
 **********************************************************************************************************************
+Maqsood Hasnain
+
+Q7:
+
 **********************************************************************************************************************
 
 Q8 (Zexian Lin):
@@ -192,3 +196,30 @@ circular linked list in order to keep tracker of the substring.Array doesn't hav
 circular array, but for linked list, we can construct a circular linked list when we
 are testing.
 **********************************************************************************************************************
+Maqsood Hasnain
+
+Q10) create a linked list and fill with numbers 1 to k,then create a function that
+sorts the list so that first all odd numbers are listed and then all even numbers.
+Some conditions that were taken by the question:
+1. create linked list
+2. fill with numbers
+3. create a sort function
+
+addlist function: function in which when 
+called will take the inputted number and insert
+it after the head node which is a nullptr
+
+printlist function : the generic function of printing a linked list from couting
+the info and then continuing on to the next node via current=current->link
+
+changeEvenToOdd: function that works multiple checks to make sure
+that the odd number of elements are moved to the back and in the same order
+and then checks to make sure those even nodes are push to the front in the
+same order
+
+Main: initiated a linked list and filled it with 10 numbers 1-10 and
+then print out the list when the list is printed the next function is
+the changeEventoOdd function which would switch around the nodes from
+the beginning becoming even nodes and the ending become odd nodes, then
+proceed to print out the same list after the function is processed and 
+show the changing of the even to odd nodes
