@@ -5,7 +5,7 @@ using namespace std;
 //Author: Zexian Lin
 //3. Create a sort for 2d matrices.Do a bubble sort, insertion sort, and selection sort
 //variation of this.
-
+//
 //For sorting in the 2d matices, we need to pay attention to the indexing. 
 //Let say we have a 2d matrix with i rows and j column.
 //When we traverse from one row to its second row, i needs to starting from 0, j only needs to plus 1.

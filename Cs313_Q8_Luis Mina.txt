@@ -1,0 +1,114 @@
+//Q8:
+//Create a ​templated class​ that ​effectively f​inds all possibilities of a list of
+//random numbers that adds to some s.
+//
+//Conditions taken from question:
+//1.templated class allows list of different datatypes to use the same function
+//2.some s is arbitrary as well as array size(size of list)
+//3.effectively means vector use
+//sources:
+//1.https://github.com/jainaman224/Algo_Ds_Notes/pull/1471/files
+//2.udemy section 14|49
+//Group4: Luis Mina
+
+#include<iostream>
+#include<vector>
+#include<time.h>
+using namespace std;
+
+//able to take in at least two data types int and double
+template<class T>
+void posSumPre(T* a, vector<T>& subset, int n, T subsetSum, int index, T sum,vector<vector<T>>&  v)
+{
+    //if a path is found that adds up to some s, that subset will be saved in v
+    if(subsetSum==sum){
+        v.push_back(subset);
+        return;
+    }
+    
+    //loop until i tranverses to n
+    for(int i = index;i<n;i++){
+        //adds element to current subset
+        subset.push_back(a[i]);
+        //keeps track of current sum, increases index by 1
+        posSumPre(a, subset, n, subsetSum+a[i], i+1, sum,v);
+        //moves onto next element
+        subset.pop_back();
+    }
+}
+
+//inputs takes the datatype i.e.int, double along three parameters
+template<class T>
+void inputs(T* a, int n, T s){
+    
+    //vector of vectors, used to store each subset
+    vector<vector<T>> v;
+    vector<T> subset;
+
+    //
+    posSumPre<T>(a, subset, n, 0, 0, s,v);
+    
+    //printing
+    typename vector<vector<T>>::iterator row;
+    typename vector<T>::iterator col;
+    
+    if(v.empty()){
+        cout<<"No possibilites found"<<endl;
+        exit(0);
+    }
+    
+    for(row=v.begin();row!=v.end();row++){
+        for(col=row->begin();col!=row->end();col++){
+            cout<<*col<<" ";
+        }
+        cout<<endl;
+    }
+
+    
+}
+
+void numList(int* arr,int n);
+
+int main()
+{
+    //test for template use of double
+    /*
+    double arr1[5]={1.1,2.1,3.2,4,5};
+    int n1 = sizeof(arr1)/sizeof(arr1[0]);
+    double sum1 = 3.2;
+    inputs<double>(arr1,n1,sum1);
+    */
+    //test for random array list
+    /*
+    int n;
+    cout<<"Input in array size: ";
+    cin>>n;
+    int arr[n];
+    numList(arr,n);
+    int sum=17;
+    */
+    //number list
+    int arr[5]={1,2,3,4,5};
+    //finds array size
+    int n = sizeof(arr)/sizeof(arr[0]);
+    //some s
+    int sum = 7;
+    
+    
+    //takes number list, array size and sum
+    inputs<int>(arr,n,sum);
+    
+    return 0;
+}
+
+//testing random array list
+void numList(int* arr,int n){
+    srand((unsigned)time(NULL));
+    
+    for(int i=0; i<n; i++){
+        arr[i] = (rand()%10)+1;
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl<<endl;
+    
+}

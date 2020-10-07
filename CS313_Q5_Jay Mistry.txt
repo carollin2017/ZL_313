@@ -1,0 +1,132 @@
+#include <iostream>
+#include <utility>
+#include <cstdlib>
+#include <stdlib.h>
+using namespace std;
+
+void SelectionSort(int arr[], int arrSize)
+{
+    // variable to store the index of the minimum value
+    // in each iteration
+    int minIndex;
+
+    // Iterate until the N-1 elements
+    for (int i = 0; i < arrSize - 1; ++i)
+    {
+        // Set the first unsorted element
+        // as the minimum value
+        minIndex = i;
+
+        // Iterate through the unsorted elements only
+        for (int j = i + 1; j < arrSize; ++j)
+        {
+            // set the new minimum value
+            // if the saved minimum value is higher
+            // than the current index value
+            if (arr[j] < arr[minIndex])
+                minIndex = j;
+        }
+
+        // Swap the the first unsorted element
+        // with the minimum value
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+
+void InsertionSort(int arr[], int arrSize)
+{
+    // Iterate to all array's element
+    for(int i = 0; i < arrSize; ++i)
+    {
+        // Set the current element
+        // as reference value
+        int refValue = arr[i];
+
+        // variable to shift the element
+        // to right position
+        int j;
+
+        // Iterate through the sorted element
+        // to insert the reference value
+        // in right position
+        for(j = i - 1; j >= 0; --j)
+        {
+            // if the value of the current index
+            // is greater than the reference value then
+            // move the current value to right side
+            // otherwise, put the reference value
+            // in the current index
+            if(arr[j] > refValue)
+                arr[j+1] = arr[j];
+            else
+                break;
+        }
+
+        // here's the line to put the reference value
+        // in the current index (the right position)
+        arr[j + 1] = refValue;
+    }
+}
+
+void MultiSort(int arr[], int size) {
+    int a[10];  //array 1
+    int b[12]; //array 2
+    int count;
+    for (int i = 0; i < 10; i++) {
+        a[i] = arr[i];                   //Puts the first 10 elements in array A
+    }
+    count = 10;
+    for (int i = 0; i < 12; i++) {
+    
+        b[i] = arr[count++];             //Puts the remaining elements in Array B
+    }
+
+    SelectionSort(a, 10); //First 10 elements are sorted using selection sort ( X < 10 )
+    InsertionSort(b, 12); //Last 12 are sorted using Insertion Sort ( x > 10 )
+    
+    for (int i = 0; i < 10; i++) {
+        arr[i] = a[i];                 //Transfer back to previous Original array
+    }
+    count = 10;
+    for (int i = 0;i < 12; i++) {   	
+        arr[count++] = b[i];
+    }
+    cout<<endl;
+    SelectionSort(arr, size);
+    cout<<"The Sorted Array: "<<endl;
+    for(int i=0; i < size; i++){
+    	cout<<arr[i]<< " "; //Print the whole array
+	}
+}
+
+//int compare (const void * a, const void * b)
+//{
+// return ( *(int*)a - *(int*)b );
+//}
+
+
+int main()
+{
+    int size = 22;
+    int arr[22];
+    cout << "Creating Random Array: " <<endl;
+    for (int i = 0; i < size; i++){
+        arr[i] = rand() % 99 + 1;
+        cout << arr[i] << " ";
+
+    }
+    cout << endl;
+    cout << endl;
+    MultiSort(arr, 22);
+    //cout << endl;
+    //qsort (arr, 22, sizeof(int), compare);
+    //for (int i = 0; i < size; i++){
+    //   cout << arr[i] << " ";
+
+    //}
+    
+    
+    return 0;
+
+}
