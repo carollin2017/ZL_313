@@ -1,0 +1,517 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <fstream>
+#include <time.h>
+#include <iomanip>
+#include <ostream>
+#include "LinkedList.h"
+#include "Vector.h"
+#include "Timing.h"
+using namespace std;
+void BuildList(int size, LinkedList<int>& L) {
+	srand(time(NULL));
+	for (int i = 0; i < size; i++) {
+		int num = rand() % size;
+		L.front(num);
+	}
+}
+void BuildVector(int size, vector<int>& v) {
+	srand(time(0));
+	for (int i = 0; i < size; i++) {
+		v.push_back(rand() % size);
+	}
+}
+
+int main()
+{
+	LinkedList<int> list1; //instantiating 2 versions of a linked list
+	int num;
+	int listSize = 10000000;
+	int VecSize = 10000000;
+	list1.front(0);
+	BuildList(listSize, list1);
+
+	auto listmilliseconds = TimeFunc([&]() {BuildList(listSize, list1); });
+	cout << "listmilliseconds " << listmilliseconds << endl;
+
+	list1.deleteNode(3);
+	list1.deleteNode(5);
+	list1.deleteNode(7);
+
+	cout << endl;
+	list1.front(6);
+	list1.front(9);
+
+	list1.print();
+
+
+	cout << endl << endl;
+	Iterator<int> iterator; //iterator to go through each linked list
+	for (iterator = list1.begin(); iterator != list1.end(); ++iterator)
+	{
+		cout << *iterator << endl;
+	}
+
+	// Vector
+	vector<int> v3;
+	V v2(3); //single argument declaration just the size
+	V v1(1, 5); //double argument declaration the size and the number that is initialized in each
+
+	BuildVector(VecSize, v3);
+
+	auto vectormilliseconds = TimeFunc([&]() {BuildVector(VecSize, v3); });
+	cout << "vectormilliseconds " << vectormilliseconds << endl;
+
+
+	v1.pushback(1); // insert 1,2,3 into the first vector
+	v1.pushback(2);
+	v1.pushback(3);
+
+	v2.pushback(2); // insert 2,4,6 into the second vector
+	v2.pushback(4);
+	v2.pushback(6);
+
+	cout << "V2 size: " << v2.size() << endl;
+	cout << "V2 front: " << v2.front() << endl;
+	cout << "V2 back: " << v2.back() << endl;
+	cout << "Back before pop " << v2.back() << endl;
+	v2.popback(); //pop off the last item
+	cout << "Back after pop " << v2.back() << endl;
+	v2.clear();
+	cout << "Magic Ta-da, no vectors left v2 : " << v2.size() << endl;
+
+
+	cout << "V1 size: " << v1.size() << endl;
+	cout << "V1 front: " << v1.front() << endl;
+	cout << "V1 back: " << v1.back() << endl;
+	cout << "Back before pop " << v1.back() << endl;
+	v1.popback();//pop off the last item
+	cout << "Back after pop " << v1.back() << endl;
+	v1.clear();
+	cout << "Magic Ta-da, no vectors left v2: " << v1.size() << endl;
+}
+
+******************************************************************************************************
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <fstream>
+#include <time.h>
+#include <iomanip>
+#include <ostream>
+#include "LinkedList.h"
+#include "Vector.h"
+#include "Timing.h"
+using namespace std;
+void BuildList(int size, LinkedList<int> L) {
+	srand(time(NULL));
+	for (int i = 0; i < size; i++) {
+		int num = rand() % size;
+		L.front(num);
+	}
+}
+void BuildVector(int size, vector<int> v) {
+	srand(time(0));
+	for (int i = 0; i < size; i++) {
+		v.push_back(rand() % size);
+	}
+}
+
+int main()
+{
+	LinkedList<int> list1; //instantiating 2 versions of a linked list
+	int num;
+	int listSize = 10;
+	int VecSize = 10;
+	list1.front(0);
+	BuildList(listSize, list1);
+
+	for (int i = 0; i < listSize; i++) //iterate the listSize based on the input
+	{
+		num = rand() % listSize;
+		list1.back(num);//input those numbers into the list from last to first
+		
+	}
+	auto listmilliseconds = TimeFunc([&]() {BuildList(listSize, list1); });
+	cout << "listmilliseconds " << listmilliseconds << endl;
+	
+	list1.deleteNode(3);
+	list1.deleteNode(5);
+	list1.deleteNode(7);
+
+	cout << endl;
+	list1.front(6);
+	list1.front(9);
+
+	list1.print();
+
+
+	cout << endl << endl;
+	Iterator<int> iterator; //iterator to go through each linked list
+	for (iterator = list1.begin(); iterator != list1.end(); ++iterator)
+	{
+		cout << *iterator << endl;
+	}
+
+// Vector
+	vector<int> v3;
+	V v2(3); //single argument declaration just the size
+	V v1(1,5); //double argument declaration the size and the number that is initialized in each
+	
+	BuildVector(VecSize, v3);
+
+	auto vectormilliseconds = TimeFunc([&]() {BuildVector(VecSize, v3); });
+	cout << "vectormilliseconds " << vectormilliseconds << endl;
+
+	
+	v1.pushback(1); // insert 1,2,3 into the first vector
+	v1.pushback(2);
+	v1.pushback(3);
+
+	v2.pushback(2); // insert 2,4,6 into the second vector
+	v2.pushback(4);
+	v2.pushback(6);
+
+	cout << "V2 size: " << v2.size() << endl;
+	cout << "V2 front: " << v2.front() << endl;
+	cout << "V2 back: " << v2.back() << endl;
+	cout << "Back before pop " << v2.back() << endl;
+	v2.popback(); //pop off the last item
+	cout << "Back after pop " << v2.back() << endl;
+	v2.clear(); 
+	cout << "Magic Ta-da, no vectors left v2 : " << v2.size() << endl;
+
+	
+	cout << "V1 size: " << v1.size() << endl;
+	cout << "V1 front: " << v1.front() << endl;
+	cout << "V1 back: " << v1.back() << endl;
+	cout << "Back before pop " << v1.back() << endl;
+	v1.popback();//pop off the last item
+	cout << "Back after pop " << v1.back() << endl;
+	v1.clear();
+	cout << "Magic Ta-da, no vectors left v2: " << v1.size() << endl;
+}
+******************************************************************************************************
+#pragma once
+#include "Type.h"
+#include <iostream>
+#include <string>
+using namespace std;
+/// <summary>
+/// Given the question situation it is again an open ended question, the functions of a LinkedList was given
+/// - Delete a node
+/// - back to add a node at the end of the list
+/// - front, add the number to the front of the list
+/// </summary>
+/// <typeparam name="L"></typeparam>
+template<class L>
+class LinkedList : public Type<L> {
+private:
+	using Type<L>::first; //calling the function from the other header
+	using Type<L>::last; 
+	using Type<L>::count;
+
+public:
+	bool search(const L& searchItem) const {
+		node<L>* current;
+		bool found = false;
+
+		current = first;
+		while (current != nullptr) {
+			if (current->info == searchItem) {
+				return true;
+			}
+			else {
+				current = current->link;
+			}
+		}
+		return false;
+	}
+	
+	void front(int f) {
+		node<L>* newNode = new node<L>;
+		newNode->info = f;
+		newNode->link = first;
+		first = newNode;
+	}
+
+
+	void back(const L& b) {
+		node<L>* newNode; //create newNode
+		newNode = new node<L>; //instantiate newNode
+		newNode->info = b; //inputted data
+		newNode->link = nullptr; //link the new node to nullptr because its being added at the end
+
+		//if otherwise empty
+		if (first == nullptr) {
+			first = last = newNode; 
+			count++;
+		}
+		else {
+			last->link = newNode;
+			last = newNode;
+			count++;
+		}
+	}
+	void insertFirst(const L& newItem) {
+		node<L>* newNode;
+		newNode = new node<L>;
+		newNode->info = newItem;
+
+		newNode->link = first;
+		first = newNode;
+		count++;
+
+		//if the list were empty then newNode would also be the last node in the list
+		if (last == nullptr) {
+			last = newNode;
+		}
+	}
+
+	//deleting a node can have several options
+	//the list is empty, the first node is to be deleted, a subsequent node is to be deleted, the info is not in the list
+	void deleteNode(const L& deleteItem) {
+		node<L>* current;
+		node<L>* trailCurrent;
+		bool found;
+
+		if (first == nullptr) {
+			cout << "Can't delete from an empty list." << endl;
+		}
+		else {
+			if (first->info == deleteItem) {   //if found in first spot
+				current = first;
+				first = first->link;
+				count--;
+
+				if (first == nullptr) last = nullptr; //if the list has only one node
+				delete current;
+			}
+			else {
+				found = false;
+				trailCurrent = first;
+
+				current = first->link;
+
+				while (current != nullptr && !found) {
+					if (current->info != deleteItem) {
+						trailCurrent = current;
+						current = current->link;
+					}
+					else {
+						found = true;
+					}
+				}
+
+				if (found) {
+					trailCurrent->link = current->link;
+					count--;
+					cout << "Deleted a node" << endl; //so the person who added the node knows what the program has done
+					if (last == current) last = trailCurrent; //if deleted node was the last node
+					delete current;
+				}
+				else {
+					cout << "Item not found in list." << endl;
+				}
+			}
+		}
+	}
+};
+******************************************************************************************************
+#pragma once
+#include "Node.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+template<class L>
+class Iterator {
+private:
+	node<L>* current;
+
+public:
+	//constructors
+	Iterator() { current = nullptr; }
+	Iterator(node<L>* ptr) { current = ptr; }
+
+	//operator overloads
+	L operator*() {
+		return current->info;
+	}
+	Iterator<L> operator++() {
+		current = current->link;
+		return *this;
+	}
+	bool operator==(const Iterator<L>& right) const {
+		return (current == right.current);
+	}
+	bool operator!=(const Iterator<L>& right) const {
+		return (current != right.current);
+	}
+};
+******************************************************************************************************
+#pragma once
+#include<iostream>
+#include<iomanip>
+#include <ostream>
+using namespace std;
+///So there was a project given to us on Vectors over the summer to work on and so I used that as my template for the code in this project,
+// given there is no straight instructions for this code I'll list what I had added into the code for the Vector.h and have written comments
+// throughout the code to explain the functions being used shown in this project as well
+// I'm following that same template, but the general functions that were important to add were 
+// -constructors zero, single, and two argument
+// - size function length of the vector
+// - front function to call the first vector item 
+// - back function to call the last vector item
+// - copy function to copy the item list from one location to the next
+// - clear the vector length
+// - deconstructor deconstruct the entire vector after it is done being used
+// - inside function to insert the numbers
+//
+///
+///
+
+class V {
+public:
+	V();
+	V(int r);
+	V(int r, double n);
+
+	void copy(const V& m);
+	int size() const;
+
+	double front() const;
+	double back() const;
+	
+	~V();
+	void clear();
+
+	void pushback(double n);
+	void popback();
+
+	void deconstruct();
+	void inside(double n);
+private:
+	double* a{};
+	int length{};
+	
+};
+V::V() { //default constructor
+	int length = 0; //default 0
+	a = nullptr;//default null
+}
+
+V::V(int r) { //single argument constructor
+	if (r <= 0) { //if r is less than 0 then become default of 0
+		int length = 0;
+		a = nullptr;
+
+	}
+	else if (r > 0) { //as long as r greater than 0 insert the number as is
+		int length = r;
+		a = (double*) new double[r];
+		inside(0.0);
+	}
+}
+V::V(int r, double n)//double argument constructor
+{
+	if (r <= 0)
+	{
+		int length = 0;
+		a = nullptr;
+	}
+	else if (r > 0) {
+		int length = r;
+		a = (double*) new double[r];
+		inside(n);
+	}
+}
+
+
+int V::size() const { //length of vector
+	return length;
+}
+void V::deconstruct() {//deallocate the memory of a and put A and length to nullptr and 0 respectively
+	delete[] a;
+	a= nullptr;
+	length= 0;
+}
+void V::inside(double n) { //created a for loop to insert the given number into the a[#], made the function shorter 
+	for (int i = 0; i < length; i++) { 
+		a[i]= n;
+	}
+}
+double V::front() const {// check if length isn't 0 and if so then output 0 or return a[0] the first position
+	if (length== 0) return 0.0;
+	else return a[0];
+}
+double V::back() const { // check if length isn't 0 and if so then output 0 or return a[length-1] the last position
+	if (length== 0) return 0.0;
+	else return a[length - 1];
+}
+void V::clear() {
+	length= 0;
+}
+void V::popback() {
+	if (length > 0) length -= 1;
+}
+void V::pushback(double n)
+{
+	double* a_old= a;
+
+	a= new double[length + 1];
+
+	for (int i = 0; i < length; i++)
+		a[i]= a_old[i];
+	a[length]= n;
+	length= length + 1;
+
+	delete[] a_old;
+}
+void V::copy(const V& m) {
+	if (m.size() <= length)
+		for (int i = 0; i < length - 1; i++) {
+			a[i]= m.a[i];
+		}
+}
+V::~V() {
+	deconstruct();
+}
+********************************************************************************************
+#pragma once
+template<class L>
+class node {
+public:
+	L info;
+	node<L>* link;
+
+};
+********************************************************************************************
+#pragma once
+#include "LinkedList.h"
+#include <chrono>
+using std::chrono::system_clock;
+using std::chrono::steady_clock;
+using std::chrono::duration_cast;
+using std::chrono::seconds;
+using std::chrono::milliseconds;
+
+#include <vector>
+#include <list>
+#include "Vector.h"
+#include "LinkedList.h"
+using std::vector;
+using std::list;
+
+
+
+template <typename Func>
+long long TimeFunc(Func f)
+{
+	auto begin = steady_clock::now();
+	f();
+	auto end = steady_clock::now();
+
+	return duration_cast<milliseconds>(end - begin).count();
+}
